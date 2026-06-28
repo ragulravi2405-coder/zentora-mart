@@ -1,0 +1,8 @@
+{
+  "name": "Zentora",
+  "description": "Zentora – Enterprise AI SaaS Platform for AI-Powered Retail Intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

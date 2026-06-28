@@ -1,0 +1,129 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile for the retailer merchant.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "onboardingCompleted": { "type": "boolean" },
+        "storeId": { "type": "string" },
+        "language": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "onboardingCompleted"]
+    },
+    "Store": {
+      "title": "Merchant Store",
+      "description": "Configuration details of a retailer's store.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "tagline": { "type": "string" },
+        "currency": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "gstNumber": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "currency"]
+    },
+    "Product": {
+      "title": "Inventory Product",
+      "description": "Product in the inventory of a store.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "costPrice": { "type": "number" },
+        "quantity": { "type": "number" },
+        "minStockAlert": { "type": "number" },
+        "barcode": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "storeId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "quantity", "storeId"]
+    },
+    "Sale": {
+      "title": "Store Sale Record",
+      "description": "A completed transaction/sale record in the store.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "storeId": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "discount": { "type": "number" },
+        "gstAmount": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "storeId", "total", "paymentMethod"]
+    },
+    "Customer": {
+      "title": "Store Customer Profile",
+      "description": "Information about customers and their outstanding credit.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "outstandingCredit": { "type": "number" },
+        "storeId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "storeId"]
+    },
+    "CreditTransaction": {
+      "title": "Store Credit Ledger Transaction",
+      "description": "Ledger entries for customer outstanding credit.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "storeId": { "type": "string" },
+        "customerId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "storeId", "customerId", "amount", "type"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Stores user profiles keyed by their Firebase Auth UID."
+    },
+    "stores/{storeId}": {
+      "schema": "Store",
+      "description": "Stores store details keyed by storeId."
+    },
+    "products/{productId}": {
+      "schema": "Product",
+      "description": "Stores products keyed by productId."
+    },
+    "sales/{saleId}": {
+      "schema": "Sale",
+      "description": "Stores sales transactions keyed by saleId."
+    },
+    "customers/{customerId}": {
+      "schema": "Customer",
+      "description": "Stores customer profiles keyed by customerId."
+    },
+    "creditTransactions/{transactionId}": {
+      "schema": "CreditTransaction",
+      "description": "Stores customer credit transaction logs keyed by transactionId."
+    }
+  }
+}
