@@ -1,19 +1,20 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInAnonymously, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import appletConfig from '../firebase-applet-config.json';
 
-// Configure Firebase Client from Environment Variables
+// Configure Firebase Client from Environment Variables or Applet Config
 const firebaseConfig = {
-  apiKey: (import.meta as any).env.VITE_FIREBASE_API_KEY || "AIzaSyBI4qQRten4GsE6ZWqM9__xYXE8rnAv2LY",
-  authDomain: (import.meta as any).env.VITE_FIREBASE_AUTH_DOMAIN || "elegant-bucksaw-46ppv.firebaseapp.com",
-  projectId: (import.meta as any).env.VITE_FIREBASE_PROJECT_ID || "elegant-bucksaw-46ppv",
-  storageBucket: (import.meta as any).env.VITE_FIREBASE_STORAGE_BUCKET || "elegant-bucksaw-46ppv.firebasestorage.app",
-  messagingSenderId: (import.meta as any).env.VITE_FIREBASE_MESSAGING_SENDER_ID || "480389351703",
-  appId: (import.meta as any).env.VITE_FIREBASE_APP_ID || "1:480389351703:web:206add0e7c9f60b8df8f52"
+  apiKey: (import.meta as any).env.VITE_FIREBASE_API_KEY || appletConfig.apiKey || "AIzaSyBI4qQRten4GsE6ZWqM9__xYXE8rnAv2LY",
+  authDomain: (import.meta as any).env.VITE_FIREBASE_AUTH_DOMAIN || appletConfig.authDomain || "elegant-bucksaw-46ppv.firebaseapp.com",
+  projectId: (import.meta as any).env.VITE_FIREBASE_PROJECT_ID || appletConfig.projectId || "elegant-bucksaw-46ppv",
+  storageBucket: (import.meta as any).env.VITE_FIREBASE_STORAGE_BUCKET || appletConfig.storageBucket || "elegant-bucksaw-46ppv.firebasestorage.app",
+  messagingSenderId: (import.meta as any).env.VITE_FIREBASE_MESSAGING_SENDER_ID || appletConfig.messagingSenderId || "480389351703",
+  appId: (import.meta as any).env.VITE_FIREBASE_APP_ID || appletConfig.appId || "1:480389351703:web:206add0e7c9f60b8df8f52"
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, "ai-studio-zentora-be26a5fa-8fd0-432f-98ee-915ad9958cc1");
+export const db = getFirestore(app, appletConfig.firestoreDatabaseId || "ai-studio-zentora-be26a5fa-8fd0-432f-98ee-915ad9958cc1");
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
